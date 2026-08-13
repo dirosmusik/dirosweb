@@ -18,11 +18,12 @@ export const content = {
       location: 'Barcelona, España',
     },
     venues: {
-      title: 'Clubs & Venues',
-      subtitle: 'Ciudades y clubes donde DIROS ha pinchado.',
+      title: 'DIROS SPOT',
+      subtitle: 'Ciudades y clubs donde he compartido mi música.',
       spain: 'España',
       international: 'Internacional',
       mapLabel: 'Mapa de actuaciones',
+      more: 'Otros clubs',
     },
     tour: {
       title: 'Próximas Fechas',
@@ -90,11 +91,12 @@ export const content = {
       location: 'Barcelona, Spain',
     },
     venues: {
-      title: 'Clubs & Venues',
-      subtitle: 'Cities and clubs where DIROS has played.',
+      title: 'DIROS SPOT',
+      subtitle: "Cities and clubs where I've shared my music.",
       spain: 'Spain',
       international: 'International',
       mapLabel: 'Performance map',
+      more: 'Other clubs',
     },
     tour: {
       title: 'Upcoming Dates',
