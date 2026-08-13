@@ -43,14 +43,14 @@ export function HeroSection() {
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">{t.heroBio}</p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            
+            <a
               href="#contact"
               className="inline-flex items-center gap-2 rounded-full bg-[#A71D2A] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-[0_0_25px_rgba(167,29,42,0.7)]"
             >
               {t.booking}
               <ArrowRight className="size-4" />
             </a>
-            
+            <a
               href="#media"
               className="inline-flex items-center gap-2 rounded-full border border-[#A71D2A]/40 bg-elevated/60 px-6 py-3 text-sm font-semibold text-foreground backdrop-blur transition-all duration-300 hover:scale-105 hover:border-[#A71D2A] hover:bg-elevated hover:shadow-[0_0_20px_rgba(167,29,42,0.4)]"
             >
