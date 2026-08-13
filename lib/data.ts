@@ -18,8 +18,27 @@ export const venuesSpain = [
 
 export const venuesIntl = [{ name: 'Zanzibar', city: 'Ravena, Italy' }]
 
-export const videoClips = [
-  { title: 'Tantra', location: 'Ibiza', image: '/clip-tantra.png' },
-  { title: 'The Bassement', location: 'Madrid', image: '/clip-bassement.png' },
-  { title: 'Pacha', location: 'Barcelona', image: '/clip-pacha.png' },
+// External profiles used by the hero secondary actions and social bar
+export const LINKS = {
+  bookingEmail: 'bookings@dirosmusik.com',
+  bookingMailto: 'mailto:bookings@dirosmusik.com?subject=Booking%20enquiry%20%E2%80%94%20DIROS',
+  spotify: 'https://open.spotify.com/search/DIROS',
+  soundcloudSet: 'https://soundcloud.com/diros',
+  instagram: 'https://instagram.com/diros.musik',
+  bandcamp: 'https://bandcamp.com',
+  youtube: 'https://youtube.com',
+  tiktok: 'https://tiktok.com/@diros.musik',
+}
+
+// Horizontal social bar just below the hero
+export const socialBar = [
+  { label: 'SoundCloud', href: LINKS.soundcloudSet, icon: 'soundcloud' as const },
+  { label: 'Spotify', href: LINKS.spotify, icon: 'spotify' as const },
+  { label: 'Instagram', href: LINKS.instagram, icon: 'instagram' as const },
+  { label: 'Bandcamp', href: LINKS.bandcamp, icon: 'bandcamp' as const },
+  { label: 'YouTube', href: LINKS.youtube, icon: 'youtube' as const },
+  { label: 'TikTok', href: LINKS.tiktok, icon: 'tiktok' as const },
 ]
+
+// Upcoming shows — schedule list
+export const upcomingShows: { date: string; day: string; venue: string; city: string }[] = []

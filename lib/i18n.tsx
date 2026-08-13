@@ -6,12 +6,29 @@ export type Lang = 'es' | 'en'
 
 export const content = {
   es: {
-    nav: { media: 'Media', events: 'Eventos', press: 'Press Kit', contact: 'Contacto' },
+    nav: { bio: 'Bio', venues: 'Clubs', tour: 'Fechas', contact: 'Contacto' },
     booking: 'Solicitar Booking',
     presskit: 'Presskit',
     copied: '¡Copiado!',
     role: 'DJ | Producer',
     heroTag: 'Tech House · Minimal Deep Tech · Minimal | Barcelona',
+    bio: {
+      title: 'Biografía',
+      genresLabel: 'Estilos',
+      location: 'Barcelona, España',
+    },
+    venues: {
+      title: 'Clubs & Venues',
+      subtitle: 'Ciudades y clubes donde DIROS ha pinchado.',
+      spain: 'España',
+      international: 'Internacional',
+      mapLabel: 'Mapa de actuaciones',
+    },
+    tour: {
+      title: 'Próximas Fechas',
+      subtitle: 'Próximos shows y apariciones.',
+      tba: 'Nuevas fechas muy pronto. Vuelve a consultar o solicita un booking.',
+    },
     heroBio:
       'DIROS es un DJ y productor de Barcelona en constante evolución, con una sólida formación y un profundo conocimiento de la música electrónica. Su enfoque versátil y dinámico le permite fusionar distintos estilos en sets envolventes, diseñados para adaptarse con precisión al contexto y la energía de cada pista.',
     listen: 'Escuchar',
@@ -61,12 +78,29 @@ export const content = {
     rights: 'Todos los derechos reservados.',
   },
   en: {
-    nav: { media: 'Media', events: 'Events', press: 'Press Kit', contact: 'Contact' },
+    nav: { bio: 'Bio', venues: 'Clubs', tour: 'Dates', contact: 'Contact' },
     booking: 'Request Booking',
     presskit: 'Presskit',
     copied: 'Copied!',
     role: 'DJ | Producer',
     heroTag: 'Tech House · Minimal Deep Tech · Minimal | Barcelona',
+    bio: {
+      title: 'Biography',
+      genresLabel: 'Styles',
+      location: 'Barcelona, Spain',
+    },
+    venues: {
+      title: 'Clubs & Venues',
+      subtitle: 'Cities and clubs where DIROS has played.',
+      spain: 'Spain',
+      international: 'International',
+      mapLabel: 'Performance map',
+    },
+    tour: {
+      title: 'Upcoming Dates',
+      subtitle: 'Next shows and appearances.',
+      tba: 'New dates coming soon. Check back or request a booking.',
+    },
     heroBio:
       'DIROS is a DJ and producer from Barcelona in constant evolution, with a solid background and a deep knowledge of electronic music. His versatile and dynamic approach allows him to fuse different styles into immersive sets, designed to precisely adapt to the context and energy of each dance floor.',
     listen: 'Listen',

@@ -1,25 +1,14 @@
 'use client'
 
-import { useState } from 'react'
 import Image from 'next/image'
-import { ArrowRight, Headphones, Radio, ChevronDown, Copy, Check } from 'lucide-react'
+import { ArrowRight, Headphones, Radio, ChevronDown } from 'lucide-react'
 import { useLang } from '@/lib/i18n'
-
-const BOOKING_EMAIL = 'bookings@dirosmusik.com'
+import { LINKS } from '@/lib/data'
+import { CopyEmail } from '@/components/copy-email'
+import { PressAccessModal } from '@/components/press-access-modal'
 
 export function HeroSection() {
   const { t } = useLang()
-  const [copied, setCopied] = useState(false)
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(BOOKING_EMAIL)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1800)
-    } catch {
-      // clipboard unavailable — ignore
-    }
-  }
 
   return (
     <section id="top" className="relative isolate h-[100svh] w-full overflow-hidden">
@@ -39,11 +28,6 @@ export function HeroSection() {
 
       {/* Centered content */}
       <div className="relative z-10 mx-auto flex h-full max-w-5xl flex-col items-center justify-center px-4 text-center sm:px-6">
-        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.25em] text-white/80 backdrop-blur">
-          <span className="size-1.5 rounded-full bg-[#B21A20]" aria-hidden />
-          {t.role}
-        </div>
-
         <h1 className="sr-only">DIROS</h1>
         <Image
           src="/diros-logo.png"
@@ -54,61 +38,47 @@ export function HeroSection() {
           className="h-auto w-full max-w-md drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)] sm:max-w-xl lg:max-w-2xl"
         />
 
-        <p className="mt-6 max-w-2xl text-balance text-base font-medium text-white/90 sm:text-lg lg:text-xl">
-          {t.heroTag}
-        </p>
-
-        {/* Buttons */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+        {/* Primary booking action */}
+        <div className="mt-12 flex flex-col items-center">
           <a
-            href="mailto:bookings@dirosmusik.com?subject=Booking%20enquiry%20%E2%80%94%20DIROS"
+            href={LINKS.bookingMailto}
             className="inline-flex items-center gap-2 rounded-full bg-[#8B0D18] px-6 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-[#B21A20] hover:shadow-[0_0_20px_rgba(139,13,24,0.6)]"
           >
             {t.booking}
             <ArrowRight className="size-4" />
           </a>
+          <CopyEmail className="mt-2" />
+        </div>
+
+        {/* Three secondary links */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <a
-            href="#media"
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-white/40 hover:bg-white/10"
+            href={LINKS.spotify}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-2.5 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-white/40 hover:bg-white/10"
           >
             <Headphones className="size-4" />
             {t.listen}
           </a>
           <a
-            href="#media"
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-white/40 hover:bg-white/10"
+            href={LINKS.soundcloudSet}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-2.5 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-white/40 hover:bg-white/10"
           >
             <Radio className="size-4" />
             {t.lastSet}
           </a>
+          <PressAccessModal className="px-6 py-2.5 text-sm font-medium" />
         </div>
-
-        {/* Clickable copy-to-clipboard email */}
-        <button
-          type="button"
-          onClick={copyEmail}
-          aria-label={`${BOOKING_EMAIL} — ${copied ? t.copied : 'copy'}`}
-          className="mt-2 flex cursor-pointer items-center justify-center gap-1.5 text-xs text-white/70 transition-colors hover:text-white"
-        >
-          {copied ? (
-            <>
-              <Check className="size-3.5" aria-hidden />
-              {t.copied}
-            </>
-          ) : (
-            <>
-              {BOOKING_EMAIL}
-              <Copy className="size-3.5" aria-hidden />
-            </>
-          )}
-        </button>
       </div>
 
       {/* Scroll down indicator */}
       <a
-        href="#media"
+        href="#bio"
         aria-label={t.scroll}
-        className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center gap-2 text-white/70 transition-colors hover:text-white"
+        className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-white/70 transition-colors hover:text-white"
       >
         <span className="text-[10px] font-medium uppercase tracking-[0.3em]">{t.scroll}</span>
         <ChevronDown className="size-5 animate-bounce" />
