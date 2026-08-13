@@ -3,12 +3,19 @@
 import { useEffect, useRef, useState } from 'react'
 import { Lock, X } from 'lucide-react'
 import { useLang } from '@/lib/i18n'
+import { cn } from '@/lib/utils'
 
 const ACCESS_PASSWORD = 'dirosmusik2026'
 const DROPBOX_URL =
   'https://www.dropbox.com/scl/fo/g2784s1lsxckv9ejg7982/h?rlkey=5o2546ye32bli92d61twitnh8&st=xtki1c65&dl=0'
 
-export function PressAccessModal({ children }: { children?: React.ReactNode }) {
+export function PressAccessModal({
+  children,
+  className,
+}: {
+  children?: React.ReactNode
+  className?: string
+}) {
   const { t } = useLang()
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState('')
@@ -53,7 +60,10 @@ export function PressAccessModal({ children }: { children?: React.ReactNode }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-3 font-medium text-foreground backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-white/40 hover:bg-white/10"
+        className={cn(
+          'inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-3 font-medium text-white backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-white/40 hover:bg-white/10',
+          className,
+        )}
       >
         <Lock className="size-4" />
         {children ?? t.press.pressAssets}

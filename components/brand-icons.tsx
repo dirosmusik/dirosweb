@@ -32,3 +32,39 @@ export function SpotifyIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+export function BandcampIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <rect x="2.5" y="5.5" width="19" height="13" rx="2.5" />
+      <path d="M8.5 9.5 6 14.5h5.2l2.5-5Z" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+export function YoutubeIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <rect x="2.5" y="5.5" width="19" height="13" rx="4" />
+      <path d="m10.2 9.3 4.4 2.7-4.4 2.7Z" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+export function TiktokIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5" />
+      <path d="M14 6.2A5 5 0 0 0 18.6 9" />
+    </svg>
+  )
+}
+
+export const brandIconMap = {
+  instagram: InstagramIcon,
+  soundcloud: SoundcloudIcon,
+  spotify: SpotifyIcon,
+  bandcamp: BandcampIcon,
+  youtube: YoutubeIcon,
+  tiktok: TiktokIcon,
+} as const
