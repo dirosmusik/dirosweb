@@ -44,7 +44,7 @@ export function PressSection() {
               <a
                 href={card.href}
                 download={card.file}
-                className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-[#A71D2A] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:brightness-110 hover:shadow-[0_8px_30px_-8px_rgba(167,29,42,0.6)]"
+                className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-[#8B0D18] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:brightness-110 hover:shadow-[0_0_25px_rgba(139,13,24,0.7)]"
               >
                 <Download className="size-4" />
                 {t.press.download}

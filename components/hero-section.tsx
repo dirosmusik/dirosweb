@@ -26,7 +26,7 @@ export function HeroSection() {
       {/* Centered content */}
       <div className="relative z-10 mx-auto flex h-full max-w-5xl flex-col items-center justify-center px-4 text-center sm:px-6">
         <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.25em] text-white/80 backdrop-blur">
-          <span className="size-1.5 rounded-full bg-[#A71D2A]" aria-hidden />
+          <span className="size-1.5 rounded-full bg-[#B21A20]" aria-hidden />
           {t.role}
         </div>
 
@@ -48,7 +48,7 @@ export function HeroSection() {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-[#A71D2A] px-7 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(167,29,42,0.7)]"
+            className="inline-flex items-center gap-2 rounded-full bg-[#8B0D18] px-7 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(139,13,24,0.7)]"
           >
             {t.booking}
             <ArrowRight className="size-4" />

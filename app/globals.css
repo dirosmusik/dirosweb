@@ -42,18 +42,18 @@
   --elevated: #181818;
   --popover: #121212;
   --popover-foreground: #f4f4f5;
-  --primary: #a71d2a;
+  --primary: #8b0d18;
   --primary-foreground: #ffffff;
   --secondary: #181818;
   --secondary-foreground: #f4f4f5;
   --muted: #161616;
   --muted-foreground: #8a8a8f;
-  --accent: #181818;
-  --accent-foreground: #f4f4f5;
-  --destructive: #a71d2a;
+  --accent: #8b0d18;
+  --accent-foreground: #ffffff;
+  --destructive: #8b0d18;
   --border: #282828;
   --input: #282828;
-  --ring: #a71d2a;
+  --ring: #8b0d18;
   --radius: 0.625rem;
 }
 

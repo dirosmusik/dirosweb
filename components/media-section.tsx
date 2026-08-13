@@ -24,7 +24,7 @@ export function MediaSection() {
             width="100%"
             height="166"
             allow="autoplay"
-            src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F293&color=%23a71d2a&inverse=true&auto_play=false&show_user=true&hide_related=true"
+            src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F293&color=%238b0d18&inverse=true&auto_play=false&show_user=true&hide_related=true"
             className="block w-full"
           />
         </div>

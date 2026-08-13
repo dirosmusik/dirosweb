@@ -32,7 +32,7 @@ export function ContactFooter() {
             </p>
             <a
               href={`mailto:${EMAIL}?subject=Booking%20Request%20-%20DIROS`}
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#A71D2A] px-6 py-3 text-sm font-semibold text-white transition-all hover:brightness-110 hover:shadow-[0_10px_40px_-8px_rgba(167,29,42,0.7)]"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#8B0D18] px-6 py-3 text-sm font-semibold text-white transition-all hover:brightness-110 hover:shadow-[0_0_25px_rgba(139,13,24,0.7)]"
             >
               {t.contact.cta}
               <ArrowUpRight className="size-4" />

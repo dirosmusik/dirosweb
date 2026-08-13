@@ -22,7 +22,7 @@ function LangToggle() {
           aria-pressed={lang === opt}
           className={cn(
             'rounded-full px-2.5 py-1 uppercase tracking-wider transition-colors',
-            lang === opt ? 'bg-[#A71D2A] text-white' : 'text-muted-foreground hover:text-foreground',
+            lang === opt ? 'bg-[#8B0D18] text-white' : 'text-muted-foreground hover:text-foreground',
           )}
         >
           {opt}
@@ -88,7 +88,7 @@ export function SiteHeader() {
           <LangToggle />
           <a
             href="#contact"
-            className="rounded-full bg-[#A71D2A] px-4 py-2 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(167,29,42,0.3)] transition-all hover:brightness-110 hover:shadow-[0_8px_30px_-6px_rgba(167,29,42,0.6)]"
+            className="rounded-full bg-[#8B0D18] px-4 py-2 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(139,13,24,0.3)] transition-all hover:brightness-110 hover:shadow-[0_0_25px_rgba(139,13,24,0.7)]"
           >
             {t.booking}
           </a>
