@@ -3,6 +3,7 @@
 import { Download, FileText, Sliders } from 'lucide-react'
 import { useLang } from '@/lib/i18n'
 import { SectionHeading } from '@/components/section-heading'
+import { PressAccessModal } from '@/components/press-access-modal'
 
 export function PressSection() {
   const { t, lang } = useLang()
@@ -44,7 +45,7 @@ export function PressSection() {
         })}
       </div>
 
-      <div className="mt-10 flex justify-center">
+      <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
         <a
           href={`/${pressKitFile}`}
           download={pressKitFile}
@@ -53,6 +54,7 @@ export function PressSection() {
           <Download className="size-4" />
           {t.press.downloadPressKit}
         </a>
+        <PressAccessModal />
       </div>
     </section>
   )
