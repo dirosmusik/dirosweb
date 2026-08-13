@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 import { useLang } from '@/lib/i18n'
-import { mapCities, moreClubs, type MapCity } from '@/lib/data'
+import { mapCities, type MapCity } from '@/lib/data'
 import { SectionHeading } from '@/components/section-heading'
 
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
@@ -20,7 +20,7 @@ function DirosMap({
   return (
     <ComposableMap
       projection="geoMercator"
-      projectionConfig={{ center: [3.4, 41.7], scale: 1500 }}
+      projectionConfig={{ center: [4.2, 45.8], scale: 950 }}
       width={800}
       height={640}
       style={{ width: '100%', height: 'auto' }}
@@ -160,12 +160,6 @@ export function VenuesSection() {
                   <CityRow key={c.id} city={c} active={activeId === c.id} onActivate={setActiveId} />
                 ))}
               </div>
-              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                <span className="font-semibold uppercase tracking-wider text-muted-foreground/80">
-                  {t.venues.more}:
-                </span>{' '}
-                {moreClubs.join(' · ')}
-              </p>
             </div>
 
             <div>
