@@ -66,7 +66,7 @@ export function PressAccessModal({
         )}
       >
         <Lock className="size-4" />
-        {children ?? t.press.pressAssets}
+        {children ?? t.pressAssets}
       </button>
 
       {open && (
