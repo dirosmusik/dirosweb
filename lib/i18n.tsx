@@ -8,6 +8,8 @@ export const content = {
   es: {
     nav: { media: 'Media', events: 'Eventos', press: 'Press Kit', contact: 'Contacto' },
     booking: 'Solicitar Booking',
+    presskit: 'Presskit',
+    copied: '¡Copiado!',
     role: 'DJ | Producer',
     heroTag: 'Tech House · Minimal Deep Tech · Minimal | Barcelona',
     heroBio:
@@ -51,6 +53,8 @@ export const content = {
   en: {
     nav: { media: 'Media', events: 'Events', press: 'Press Kit', contact: 'Contact' },
     booking: 'Request Booking',
+    presskit: 'Presskit',
+    copied: 'Copied!',
     role: 'DJ | Producer',
     heroTag: 'Tech House · Minimal Deep Tech · Minimal | Barcelona',
     heroBio:
