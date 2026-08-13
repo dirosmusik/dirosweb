@@ -12,7 +12,9 @@ export const content = {
     heroTag: 'Tech House · Minimal Deep Tech · Minimal | Barcelona',
     heroBio:
       'DIROS es un DJ y productor de Barcelona en constante evolución, con una sólida formación y un profundo conocimiento de la música electrónica. Su enfoque versátil y dinámico le permite fusionar distintos estilos en sets envolventes, diseñados para adaptarse con precisión al contexto y la energía de cada pista.',
-    listen: 'Escuchar set',
+    listen: 'Escuchar',
+    lastSet: 'Último Set',
+    scroll: 'Scroll',
     scrollBio: 'Basado en Barcelona · Disponible para bookings internacionales',
     media: {
       title: 'Live Sets & Media',
@@ -53,7 +55,9 @@ export const content = {
     heroTag: 'Tech House · Minimal Deep Tech · Minimal | Barcelona',
     heroBio:
       'DIROS is a DJ and producer from Barcelona in constant evolution, with a solid background and a deep knowledge of electronic music. His versatile and dynamic approach allows him to fuse different styles into immersive sets, designed to precisely adapt to the context and energy of each dance floor.',
-    listen: 'Listen to set',
+    listen: 'Listen',
+    lastSet: 'Last Set',
+    scroll: 'Scroll',
     scrollBio: 'Based in Barcelona · Available for international bookings',
     media: {
       title: 'Live Sets & Media',

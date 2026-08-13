@@ -1,65 +1,84 @@
 'use client'
 
 import Image from 'next/image'
-import { ArrowRight, Headphones } from 'lucide-react'
+import { ArrowRight, Headphones, Radio, ChevronDown } from 'lucide-react'
 import { useLang } from '@/lib/i18n'
 
 export function HeroSection() {
   const { t } = useLang()
 
   return (
-    <section id="top" className="relative isolate overflow-hidden">
-      <div className="absolute inset-0 -z-10">
+    <section id="top" className="relative isolate h-[100svh] w-full overflow-hidden">
+      {/* Full-screen background image */}
+      <Image
+        src="/hero.png"
+        alt="DIROS portrait against a deep crimson backdrop"
+        fill
+        priority
+        sizes="100vw"
+        className="-z-10 object-cover object-top"
+      />
+
+      {/* Dramatic cinematic gradient overlays */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black via-black/40 to-black/60" aria-hidden />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/50 via-transparent to-black/80" aria-hidden />
+
+      {/* Centered content */}
+      <div className="relative z-10 mx-auto flex h-full max-w-5xl flex-col items-center justify-center px-4 text-center sm:px-6">
+        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.25em] text-white/80 backdrop-blur">
+          <span className="size-1.5 rounded-full bg-[#A71D2A]" aria-hidden />
+          {t.role}
+        </div>
+
+        <h1 className="sr-only">DIROS</h1>
         <Image
-          src="/diros-hero.png"
-          alt="DIROS performing behind the decks in a dark club lit with red light"
-          fill
+          src="/diros-logo.png"
+          alt="DIROS"
+          width={1400}
+          height={373}
           priority
-          className="object-cover object-center opacity-60"
+          className="h-auto w-full max-w-md drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)] sm:max-w-xl lg:max-w-2xl"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent" />
-      </div>
 
-      <div className="mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-4 pb-16 pt-32 sm:px-6 sm:pb-24">
-        <div className="max-w-2xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground backdrop-blur">
-            <span className="size-1.5 rounded-full bg-[#A71D2A]" aria-hidden />
-            {t.scrollBio}
-          </div>
+        <p className="mt-6 max-w-2xl text-balance text-base font-medium text-white/90 sm:text-lg lg:text-xl">
+          {t.heroTag}
+        </p>
 
-          <h1 className="sr-only">DIROS</h1>
-          <Image
-            src="/diros-logo.png"
-            alt="DIROS"
-            width={1400}
-            height={373}
-            priority
-            className="h-auto w-full max-w-lg"
-          />
-
-          <p className="mt-5 text-lg font-medium text-foreground/90 text-pretty sm:text-xl">{t.heroTag}</p>
-
-          <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">{t.heroBio}</p>
-
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            
-              href="#contact"
-              className="inline-flex items-center gap-2 rounded-full bg-[#A71D2A] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-[0_0_25px_rgba(167,29,42,0.7)]"
-            >
-              {t.booking}
-              <ArrowRight className="size-4" />
-            </a>
-            
-              href="#media"
-              className="inline-flex items-center gap-2 rounded-full border border-[#A71D2A]/40 bg-elevated/60 px-6 py-3 text-sm font-semibold text-foreground backdrop-blur transition-all duration-300 hover:scale-105 hover:border-[#A71D2A] hover:bg-elevated hover:shadow-[0_0_20px_rgba(167,29,42,0.4)]"
-            >
-              <Headphones className="size-4" />
-              {t.listen}
-            </a>
-          </div>
+        {/* Buttons */}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 rounded-full bg-[#A71D2A] px-7 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(167,29,42,0.7)]"
+          >
+            {t.booking}
+            <ArrowRight className="size-4" />
+          </a>
+          <a
+            href="#media"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-white/40 hover:bg-white/10"
+          >
+            <Headphones className="size-4" />
+            {t.listen}
+          </a>
+          <a
+            href="#media"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-white/40 hover:bg-white/10"
+          >
+            <Radio className="size-4" />
+            {t.lastSet}
+          </a>
         </div>
       </div>
+
+      {/* Scroll down indicator */}
+      <a
+        href="#media"
+        aria-label={t.scroll}
+        className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center gap-2 text-white/70 transition-colors hover:text-white"
+      >
+        <span className="text-[10px] font-medium uppercase tracking-[0.3em]">{t.scroll}</span>
+        <ChevronDown className="size-5 animate-bounce" />
+      </a>
     </section>
   )
 }
