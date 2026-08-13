@@ -87,8 +87,8 @@ export function SiteHeader() {
         <div className="flex items-center gap-3">
           <LangToggle />
           <a
-            href="#contact"
-            className="rounded-full bg-[#8B0D18] px-4 py-2 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(139,13,24,0.3)] transition-all hover:brightness-110 hover:shadow-[0_0_25px_rgba(139,13,24,0.7)]"
+            href="mailto:bookings@dirosmusik.com?subject=Booking%20enquiry%20%E2%80%94%20DIROS"
+            className="rounded-full bg-[#8B0D18] px-6 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-[#B21A20] hover:shadow-[0_0_20px_rgba(139,13,24,0.6)]"
           >
             {t.booking}
           </a>
