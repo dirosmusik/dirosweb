@@ -39,6 +39,7 @@ export const content = {
       hospitalityTitle: 'Hospitality Rider',
       hospitalityDesc: 'Transfers locales + Hotel 3*+ + Refrescos en cabina',
       download: 'Descargar PDF',
+      downloadPressKit: 'Descargar Press Kit',
     },
     contact: {
       title: '¿Listo para un booking?',
@@ -84,6 +85,7 @@ export const content = {
       hospitalityTitle: 'Hospitality Rider',
       hospitalityDesc: 'Local Transfers + Hotel 3*+ + Cabin Refreshments',
       download: 'Download PDF',
+      downloadPressKit: 'Download Press Kit',
     },
     contact: {
       title: 'Ready for a booking?',
