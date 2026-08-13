@@ -1,74 +1,182 @@
 'use client'
 
-import { MapPin } from 'lucide-react'
+import { useState } from 'react'
+import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 import { useLang } from '@/lib/i18n'
-import { venuesSpain, venuesIntl } from '@/lib/data'
+import { mapCities, moreClubs, type MapCity } from '@/lib/data'
 import { SectionHeading } from '@/components/section-heading'
 
-function VenueGrid({ venues }: { venues: { name: string; city: string }[] }) {
+const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
+
+const CRIMSON = '#8B0D18'
+
+function DirosMap({
+  activeId,
+  onActivate,
+}: {
+  activeId: string | null
+  onActivate: (id: string | null) => void
+}) {
   return (
-    <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
-      {venues.map((v) => (
-        <div
-          key={v.name}
-          className="group flex items-center justify-between gap-3 bg-card px-5 py-4 transition-colors hover:bg-elevated"
-        >
-          <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-foreground">{v.name}</p>
-            {v.city ? (
-              <p className="truncate text-xs uppercase tracking-wider text-muted-foreground">{v.city}</p>
-            ) : null}
-          </div>
-          <MapPin className="size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-[#B21A20]" />
+    <ComposableMap
+      projection="geoMercator"
+      projectionConfig={{ center: [3.4, 41.7], scale: 1500 }}
+      width={800}
+      height={640}
+      style={{ width: '100%', height: 'auto' }}
+    >
+      <Geographies geography={GEO_URL}>
+        {({ geographies }) =>
+          geographies.map((geo) => (
+            <Geography
+              key={geo.rsmKey}
+              geography={geo}
+              style={{
+                default: { fill: '#18181b', stroke: '#27272a', strokeWidth: 0.5, outline: 'none' },
+                hover: { fill: '#18181b', stroke: '#27272a', strokeWidth: 0.5, outline: 'none' },
+                pressed: { fill: '#18181b', stroke: '#27272a', strokeWidth: 0.5, outline: 'none' },
+              }}
+            />
+          ))
+        }
+      </Geographies>
+
+      {mapCities.map((city) => {
+        const active = activeId === city.id
+        return (
+          <Marker
+            key={city.id}
+            coordinates={city.coordinates}
+            onMouseEnter={() => onActivate(city.id)}
+            onMouseLeave={() => onActivate(null)}
+            style={{ default: { cursor: 'pointer' }, hover: { cursor: 'pointer' }, pressed: {} }}
+          >
+            {/* pulsing halo */}
+            <circle
+              r={active ? 11 : 7}
+              fill={CRIMSON}
+              className="animate-ping"
+              style={{
+                transformBox: 'fill-box',
+                transformOrigin: 'center',
+                opacity: active ? 0.55 : 0.3,
+              }}
+            />
+            {/* glowing dot */}
+            <circle
+              r={active ? 5 : 3.5}
+              fill={CRIMSON}
+              stroke="#ffffff"
+              strokeWidth={active ? 1 : 0.6}
+              style={{
+                filter: `drop-shadow(0 0 ${active ? 14 : 7}px ${CRIMSON})`,
+                transition: 'all 0.25s ease',
+              }}
+            />
+          </Marker>
+        )
+      })}
+    </ComposableMap>
+  )
+}
+
+function CityRow({
+  city,
+  active,
+  onActivate,
+}: {
+  city: MapCity
+  active: boolean
+  onActivate: (id: string | null) => void
+}) {
+  return (
+    <button
+      type="button"
+      onMouseEnter={() => onActivate(city.id)}
+      onMouseLeave={() => onActivate(null)}
+      onFocus={() => onActivate(city.id)}
+      onBlur={() => onActivate(null)}
+      className="group flex w-full items-start justify-between gap-4 border-b border-white/5 py-3 text-left transition-colors"
+    >
+      <div className="min-w-0">
+        <div className="flex items-center gap-2.5">
+          <span
+            className="size-2 shrink-0 rounded-full transition-all duration-300"
+            style={{
+              backgroundColor: CRIMSON,
+              boxShadow: active ? `0 0 12px ${CRIMSON}` : `0 0 4px ${CRIMSON}80`,
+              transform: active ? 'scale(1.35)' : 'scale(1)',
+            }}
+            aria-hidden
+          />
+          <span
+            className="text-sm font-semibold tracking-wide transition-colors"
+            style={{ color: active ? '#f4f4f5' : '#d4d4d8' }}
+          >
+            {city.name}
+          </span>
         </div>
-      ))}
-    </div>
+        <p className="mt-1 pl-[18px] text-xs leading-relaxed text-muted-foreground">
+          {city.venues.join(' · ')}
+        </p>
+      </div>
+    </button>
   )
 }
 
 export function VenuesSection() {
   const { t } = useLang()
+  const [activeId, setActiveId] = useState<string | null>(null)
+
+  const spain = mapCities.filter((c) => c.region === 'spain')
+  const intl = mapCities.filter((c) => c.region === 'intl')
 
   return (
-    <section id="venues" className="scroll-mt-20 border-b border-border bg-[#0c0c0c]">
+    <section id="venues" className="scroll-mt-20 border-b border-border bg-black">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
         <SectionHeading eyebrow="02" title={t.venues.title} subtitle={t.venues.subtitle} />
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1fr]">
-          {/* Map widget */}
-          <div className="overflow-hidden rounded-2xl border border-border bg-card">
-            <div className="border-b border-border px-5 py-3">
+        <div className="mt-10 grid items-start gap-8 lg:grid-cols-2">
+          {/* Custom SVG map */}
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black">
+            <div className="border-b border-white/10 px-5 py-3">
               <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
                 {t.venues.mapLabel}
               </p>
             </div>
-            <div className="relative aspect-[4/3] w-full sm:aspect-auto sm:h-full sm:min-h-[420px]">
-              <iframe
-                title={t.venues.mapLabel}
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-9.8%2C35.6%2C15.5%2C45.2&layer=mapnik"
-                className="absolute inset-0 h-full w-full [filter:invert(0.92)_hue-rotate(180deg)_saturate(0.6)_contrast(0.95)]"
-                loading="lazy"
-              />
-              <div
-                className="pointer-events-none absolute inset-0 bg-[#8B0D18] mix-blend-multiply opacity-20"
-                aria-hidden
-              />
+            <div className="p-2 sm:p-4">
+              <DirosMap activeId={activeId} onActivate={setActiveId} />
             </div>
           </div>
 
-          {/* Clubs list */}
+          {/* Interactive cities / clubs list */}
           <div className="space-y-8">
             <div>
-              <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-[#B21A20]">
+              <h3 className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-[#B21A20]">
                 {t.venues.spain}
               </h3>
-              <VenueGrid venues={venuesSpain} />
+              <div className="flex flex-col">
+                {spain.map((c) => (
+                  <CityRow key={c.id} city={c} active={activeId === c.id} onActivate={setActiveId} />
+                ))}
+              </div>
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                <span className="font-semibold uppercase tracking-wider text-muted-foreground/80">
+                  {t.venues.more}:
+                </span>{' '}
+                {moreClubs.join(' · ')}
+              </p>
             </div>
+
             <div>
-              <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-[#B21A20]">
+              <h3 className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-[#B21A20]">
                 {t.venues.international}
               </h3>
-              <VenueGrid venues={venuesIntl} />
+              <div className="flex flex-col">
+                {intl.map((c) => (
+                  <CityRow key={c.id} city={c} active={activeId === c.id} onActivate={setActiveId} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
