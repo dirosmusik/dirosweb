@@ -16,7 +16,7 @@ export function HeroSection() {
         fill
         priority
         sizes="100vw"
-        className="-z-10 object-cover object-center"
+        className="-z-10 object-cover object-top"
       />
 
       {/* Dramatic cinematic gradient overlays */}
