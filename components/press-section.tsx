@@ -3,29 +3,28 @@
 import { Download, FileText, Sliders } from 'lucide-react'
 import { useLang } from '@/lib/i18n'
 import { SectionHeading } from '@/components/section-heading'
+import { PressAccessModal } from '@/components/press-access-modal'
 
 export function PressSection() {
-  const { t } = useLang()
+  const { t, lang } = useLang()
 
   const cards = [
     {
       icon: Sliders,
       title: t.press.technicalTitle,
       desc: t.press.technicalDesc,
-      href: '/diros-technical-rider.pdf',
-      file: 'diros-technical-rider.pdf',
     },
     {
       icon: FileText,
       title: t.press.hospitalityTitle,
       desc: t.press.hospitalityDesc,
-      href: '/diros-hospitality-rider.pdf',
-      file: 'diros-hospitality-rider.pdf',
     },
   ]
 
+  const pressKitFile = lang === 'es' ? 'DIROSPressKitES.pdf' : 'DIROSPressKitEN.pdf'
+
   return (
-    <section id="press" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:px-6 sm:py-28">
+    <section id="presskit" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:px-6 sm:py-28">
       <SectionHeading eyebrow="03" title={t.press.title} subtitle={t.press.subtitle} />
 
       <div className="mt-10 grid gap-4 md:grid-cols-2">
@@ -41,17 +40,21 @@ export function PressSection() {
               </div>
               <h3 className="text-xl font-semibold text-foreground">{card.title}</h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{card.desc}</p>
-              <a
-                href={card.href}
-                download={card.file}
-                className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-[#8B0D18] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:brightness-110 hover:shadow-[0_0_25px_rgba(139,13,24,0.7)]"
-              >
-                <Download className="size-4" />
-                {t.press.download}
-              </a>
             </div>
           )
         })}
+      </div>
+
+      <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <a
+          href={`/${pressKitFile}`}
+          download={pressKitFile}
+          className="inline-flex items-center gap-2 rounded-full bg-[#8B0D18] px-8 py-3 font-medium text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(139,13,24,0.7)]"
+        >
+          <Download className="size-4" />
+          {t.press.downloadPressKit}
+        </a>
+        <PressAccessModal />
       </div>
     </section>
   )

@@ -1,11 +1,25 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
-import { ArrowRight, Headphones, Radio, ChevronDown } from 'lucide-react'
+import { ArrowRight, Headphones, Radio, ChevronDown, Copy, Check } from 'lucide-react'
 import { useLang } from '@/lib/i18n'
+
+const BOOKING_EMAIL = 'bookings@dirosmusik.com'
 
 export function HeroSection() {
   const { t } = useLang()
+  const [copied, setCopied] = useState(false)
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(BOOKING_EMAIL)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1800)
+    } catch {
+      // clipboard unavailable — ignore
+    }
+  }
 
   return (
     <section id="top" className="relative isolate h-[100svh] w-full overflow-hidden">
@@ -68,6 +82,26 @@ export function HeroSection() {
             {t.lastSet}
           </a>
         </div>
+
+        {/* Clickable copy-to-clipboard email */}
+        <button
+          type="button"
+          onClick={copyEmail}
+          aria-label={`${BOOKING_EMAIL} — ${copied ? t.copied : 'copy'}`}
+          className="mt-2 flex cursor-pointer items-center justify-center gap-1.5 text-xs text-white/70 transition-colors hover:text-white"
+        >
+          {copied ? (
+            <>
+              <Check className="size-3.5" aria-hidden />
+              {t.copied}
+            </>
+          ) : (
+            <>
+              {BOOKING_EMAIL}
+              <Copy className="size-3.5" aria-hidden />
+            </>
+          )}
+        </button>
       </div>
 
       {/* Scroll down indicator */}

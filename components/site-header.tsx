@@ -46,7 +46,7 @@ export function SiteHeader() {
   const links = [
     { href: '#media', label: t.nav.media },
     { href: '#events', label: t.nav.events },
-    { href: '#press', label: t.nav.press },
+    { href: '#presskit', label: t.nav.press },
     { href: '#contact', label: t.nav.contact },
   ]
 
@@ -87,10 +87,10 @@ export function SiteHeader() {
         <div className="flex items-center gap-3">
           <LangToggle />
           <a
-            href="mailto:bookings@dirosmusik.com?subject=Booking%20enquiry%20%E2%80%94%20DIROS"
+            href="#presskit"
             className="rounded-full bg-[#8B0D18] px-6 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-[#B21A20] hover:shadow-[0_0_20px_rgba(139,13,24,0.6)]"
           >
-            {t.booking}
+            {t.presskit}
           </a>
         </div>
       </div>

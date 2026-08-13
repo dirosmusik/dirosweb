@@ -8,6 +8,8 @@ export const content = {
   es: {
     nav: { media: 'Media', events: 'Eventos', press: 'Press Kit', contact: 'Contacto' },
     booking: 'Solicitar Booking',
+    presskit: 'Presskit',
+    copied: '¡Copiado!',
     role: 'DJ | Producer',
     heroTag: 'Tech House · Minimal Deep Tech · Minimal | Barcelona',
     heroBio:
@@ -37,6 +39,16 @@ export const content = {
       hospitalityTitle: 'Hospitality Rider',
       hospitalityDesc: 'Transfers locales + Hotel 3*+ + Refrescos en cabina',
       download: 'Descargar PDF',
+      downloadPressKit: 'Descargar Press Kit',
+      pressAssets: 'Press Assets',
+    },
+    pressAccess: {
+      title: 'CONTRASEÑA DE ACCESO',
+      help: '¿Eres promotor? Solicita la clave a bookings@dirosmusik.com',
+      placeholder: 'Contraseña',
+      submit: 'Acceder',
+      error: 'Contraseña incorrecta',
+      close: 'Cerrar',
     },
     contact: {
       title: '¿Listo para un booking?',
@@ -51,6 +63,8 @@ export const content = {
   en: {
     nav: { media: 'Media', events: 'Events', press: 'Press Kit', contact: 'Contact' },
     booking: 'Request Booking',
+    presskit: 'Presskit',
+    copied: 'Copied!',
     role: 'DJ | Producer',
     heroTag: 'Tech House · Minimal Deep Tech · Minimal | Barcelona',
     heroBio:
@@ -80,6 +94,16 @@ export const content = {
       hospitalityTitle: 'Hospitality Rider',
       hospitalityDesc: 'Local Transfers + Hotel 3*+ + Cabin Refreshments',
       download: 'Download PDF',
+      downloadPressKit: 'Download Press Kit',
+      pressAssets: 'Press Assets',
+    },
+    pressAccess: {
+      title: 'ACCESS PASSWORD',
+      help: 'Are you a promoter? Request the key at bookings@dirosmusik.com',
+      placeholder: 'Password',
+      submit: 'Access',
+      error: 'Incorrect password',
+      close: 'Close',
     },
     contact: {
       title: 'Ready for a booking?',
