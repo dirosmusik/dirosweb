@@ -1,6 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import { Play } from 'lucide-react'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 import { useLang } from '@/lib/i18n'
 import { mapCities, type MapCity } from '@/lib/data'
@@ -80,6 +82,75 @@ function DirosMap({
   )
 }
 
+/** Sleek dark video-style preview card shown while a city is hovered. */
+function VenuePopover({ activeCity }: { activeCity: MapCity | null }) {
+  const [display, setDisplay] = useState<MapCity | null>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    if (activeCity) {
+      setDisplay(activeCity)
+      const raf = requestAnimationFrame(() => setVisible(true))
+      return () => cancelAnimationFrame(raf)
+    }
+    setVisible(false)
+    const timeout = setTimeout(() => setDisplay(null), 300)
+    return () => clearTimeout(timeout)
+  }, [activeCity])
+
+  if (!display) return null
+
+  return (
+    <div
+      className="pointer-events-none absolute inset-x-3 top-3 z-20 flex justify-center"
+      aria-hidden
+    >
+      <div
+        className={`w-full max-w-sm overflow-hidden rounded-xl border border-[#8B0D18]/40 bg-black/90 shadow-2xl backdrop-blur-md transition-all duration-300 ease-out ${
+          visible ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0'
+        }`}
+      >
+        <div className="relative aspect-video overflow-hidden">
+          <Image
+            src={display.image || '/placeholder.svg'}
+            alt={`${display.venues[0]} — ${display.name}`}
+            fill
+            sizes="(max-width: 640px) 90vw, 384px"
+            className={`object-cover transition-transform duration-[4000ms] ease-out ${
+              visible ? 'scale-110' : 'scale-100'
+            }`}
+          />
+          {/* video-preview treatment */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+
+          {/* muted / live indicator */}
+          <div className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-black/60 px-2 py-1 backdrop-blur-sm">
+            <span className="size-1.5 animate-pulse rounded-full bg-[#8B0D18]" />
+            <span className="text-[10px] font-semibold uppercase tracking-widest text-white/80">
+              Preview
+            </span>
+          </div>
+
+          {/* play glyph */}
+          <div className="absolute left-1/2 top-1/2 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/40 backdrop-blur-sm">
+            <Play className="size-4 translate-x-[1px] fill-white text-white" />
+          </div>
+
+          {/* title overlay */}
+          <div className="absolute inset-x-0 bottom-0 p-4">
+            <p className="text-base font-bold leading-tight text-white text-balance">
+              {display.venues.join(' · ')}
+            </p>
+            <p className="mt-0.5 text-xs font-medium uppercase tracking-widest text-[#B21A20]">
+              {display.name}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function CityRow({
   city,
   active,
@@ -130,6 +201,7 @@ export function VenuesSection() {
 
   const spain = mapCities.filter((c) => c.region === 'spain')
   const intl = mapCities.filter((c) => c.region === 'intl')
+  const activeCity = mapCities.find((c) => c.id === activeId) ?? null
 
   return (
     <section id="venues" className="scroll-mt-20 border-b border-border bg-black">
@@ -144,8 +216,9 @@ export function VenuesSection() {
                 {t.venues.mapLabel}
               </p>
             </div>
-            <div className="p-2 sm:p-4">
+            <div className="relative p-2 sm:p-4">
               <DirosMap activeId={activeId} onActivate={setActiveId} />
+              <VenuePopover activeCity={activeCity} />
             </div>
           </div>
 
