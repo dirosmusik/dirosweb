@@ -27,7 +27,7 @@ export const LINKS = {
   bookingEmail: 'bookings@dirosmusik.com',
   bookingMailto: 'mailto:bookings@dirosmusik.com?subject=Booking%20enquiry%20%E2%80%94%20DIROS',
   spotify: 'https://open.spotify.com/search/DIROS',
-  soundcloudSet: 'https://soundcloud.com/diros',
+  soundcloudSet: 'https://on.soundcloud.com/0Az91ZTE4Ku07YGkhm',
   instagram: 'https://instagram.com/diros.musik',
   bandcamp: 'https://bandcamp.com',
   youtube: 'https://youtube.com',
