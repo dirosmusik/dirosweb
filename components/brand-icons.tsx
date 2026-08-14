@@ -60,11 +60,21 @@ export function TiktokIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
+export function BeatportIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <circle cx="8.4" cy="14.6" r="4.4" />
+      <path d="M8.4 10.2V4.8a5.4 5.4 0 0 0 5.4 5.4" />
+    </svg>
+  )
+}
+
 export const brandIconMap = {
   instagram: InstagramIcon,
   soundcloud: SoundcloudIcon,
   spotify: SpotifyIcon,
   bandcamp: BandcampIcon,
+  beatport: BeatportIcon,
   youtube: YoutubeIcon,
   tiktok: TiktokIcon,
 } as const

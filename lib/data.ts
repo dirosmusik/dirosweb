@@ -36,12 +36,12 @@ export const LINKS = {
 
 // Horizontal social bar just below the hero
 export const socialBar = [
-  { label: 'SoundCloud', href: LINKS.soundcloudSet, icon: 'soundcloud' as const },
-  { label: 'Spotify', href: LINKS.spotify, icon: 'spotify' as const },
-  { label: 'Instagram', href: LINKS.instagram, icon: 'instagram' as const },
-  { label: 'Bandcamp', href: LINKS.bandcamp, icon: 'bandcamp' as const },
-  { label: 'YouTube', href: LINKS.youtube, icon: 'youtube' as const },
-  { label: 'TikTok', href: LINKS.tiktok, icon: 'tiktok' as const },
+  { label: 'SoundCloud', href: 'https://soundcloud.com/dirosdj', icon: 'soundcloud' as const },
+  { label: 'Spotify', href: 'https://open.spotify.com/intl-es/artist/03U69LhJeNwXv8hsK9F25Y?si=HSUWYsudRwyQR2J8bYeHjw', icon: 'spotify' as const },
+  { label: 'Beatport', href: 'https://www.beatport.com/es/artist/diros/2401429', icon: 'beatport' as const },
+  { label: 'Instagram', href: 'https://www.instagram.com/diros.musik/', icon: 'instagram' as const },
+  { label: 'YouTube', href: 'https://www.youtube.com/@DIROSDJ', icon: 'youtube' as const },
+  { label: 'TikTok', href: 'https://www.tiktok.com/@dirosmusik', icon: 'tiktok' as const },
 ]
 
 // Upcoming shows — schedule list
