@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 
 const ACCESS_PASSWORD = 'dirosmusik2026'
 const DROPBOX_URL =
-  'https://www.dropbox.com/scl/fo/g2784s1lsxckv9ejg7982/h?rlkey=5o2546ye32bli92d61twitnh8&st=xtki1c65&dl=0'
+  'https://www.dropbox.com/scl/fo/g2784s1lsxckv9ejg7982/h?rlkey=5o2546ye32bli92d61twitnh8&st=0gwm1r4z&dl=0'
 
 export function PressAccessModal({
   children,

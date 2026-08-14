@@ -69,7 +69,7 @@ export const content = {
       help: '¿Eres promotor? Solicita la clave a bookings@dirosmusik.com',
       placeholder: 'Introduce la contraseña...',
       submit: 'Acceder',
-      error: 'Contraseña incorrecta',
+      error: 'Contraseña incorrecta. Pídela a bookings@dirosmusik.com',
       close: 'Cerrar',
     },
     contact: {
@@ -146,7 +146,7 @@ export const content = {
       help: 'Promoter? Request access at bookings@dirosmusik.com',
       placeholder: 'Enter password...',
       submit: 'Unlock',
-      error: 'Incorrect password',
+      error: 'Incorrect password. Request it at bookings@dirosmusik.com',
       close: 'Close',
     },
     contact: {
