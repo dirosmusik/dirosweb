@@ -6,6 +6,7 @@ import { BioSection } from '@/components/bio-section'
 import { VenuesSection } from '@/components/venues-section'
 import { TourSection } from '@/components/tour-section'
 import { ContactFooter } from '@/components/contact-footer'
+import { CookieBanner } from '@/components/cookie-banner'
 
 export default function Page() {
   return (
@@ -20,6 +21,7 @@ export default function Page() {
           <TourSection />
         </main>
         <ContactFooter />
+        <CookieBanner />
       </div>
     </LanguageProvider>
   )
