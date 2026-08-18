@@ -1,8 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
-import { Play } from 'lucide-react'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 import { useLang } from '@/lib/i18n'
 import { mapCities, type MapCity } from '@/lib/data'
@@ -110,20 +108,29 @@ function VenuePopover({ activeCity }: { activeCity: MapCity | null }) {
           visible ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0'
         }`}
       >
-        <div className="relative aspect-video overflow-hidden">
-          <Image
-            src={display.image || '/placeholder.svg'}
-            alt={`${display.venues[0]} — ${display.name}`}
-            fill
-            sizes="(max-width: 640px) 90vw, 384px"
-            className={`object-cover transition-transform duration-[4000ms] ease-out ${
-              visible ? 'scale-110' : 'scale-100'
-            }`}
-          />
-          {/* video-preview treatment */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+        <div className="relative aspect-video overflow-hidden bg-black">
+          {display.video ? (
+            <video
+              key={display.video}
+              src={display.video}
+              poster={display.image}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              aria-label={`${display.venues[0]} — ${display.name}`}
+              className="size-full object-cover"
+            />
+          ) : (
+            <img
+              src={display.image}
+              alt={`${display.venues[0]} — ${display.name}`}
+              className="size-full object-cover"
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
 
-          {/* muted / live indicator */}
           <div className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-black/60 px-2 py-1 backdrop-blur-sm">
             <span className="size-1.5 animate-pulse rounded-full bg-[#8B0D18]" />
             <span className="text-[10px] font-semibold uppercase tracking-widest text-white/80">
@@ -131,14 +138,8 @@ function VenuePopover({ activeCity }: { activeCity: MapCity | null }) {
             </span>
           </div>
 
-          {/* play glyph */}
-          <div className="absolute left-1/2 top-1/2 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/40 backdrop-blur-sm">
-            <Play className="size-4 translate-x-[1px] fill-white text-white" />
-          </div>
-
-          {/* title overlay */}
           <div className="absolute inset-x-0 bottom-0 p-4">
-            <p className="text-base font-bold leading-tight text-white text-balance">
+            <p className="text-balance text-base font-bold leading-tight text-white">
               {display.venues.join(' · ')}
             </p>
             <p className="mt-0.5 text-xs font-medium uppercase tracking-widest text-[#B21A20]">
