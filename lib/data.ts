@@ -33,7 +33,6 @@ export const LINKS = {
   soundcloudSet: 'https://on.soundcloud.com/0Az91ZTE4Ku07YGkhm',
   instagram: 'https://instagram.com/diros.musik',
   bandcamp: 'https://bandcamp.com',
-  youtube: 'https://youtube.com',
   tiktok: 'https://tiktok.com/@diros.musik',
 }
 
@@ -44,7 +43,6 @@ export const socialBar = [
   { label: 'Beatport', href: 'https://www.beatport.com/es/artist/diros/2401429', icon: 'beatport' as const },
   { label: 'Bandcamp', href: 'https://diros.bandcamp.com/', icon: 'bandcamp' as const },
   { label: 'Instagram', href: 'https://www.instagram.com/diros.musik/', icon: 'instagram' as const },
-  { label: 'YouTube', href: 'https://www.youtube.com/@DIROSDJ', icon: 'youtube' as const },
   { label: 'TikTok', href: 'https://www.tiktok.com/@dirosmusik', icon: 'tiktok' as const },
 ]
 
