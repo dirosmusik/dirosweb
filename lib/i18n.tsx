@@ -37,7 +37,7 @@ export const content = {
       'DIROS es un DJ y productor de Barcelona en constante evolución, con una sólida formación y un profundo conocimiento de la música electrónica. Su enfoque versátil y dinámico le permite fusionar distintos estilos en sets envolventes, diseñados para adaptarse con precisión al contexto y la energía de cada pista.\n\nSu sonido se mueve entre Minimal Deep Tech, Minimal y Tech House, dando forma a una propuesta musical actual, pistera y de alta calidad artística. Gracias a su capacidad de lectura de pista y su identidad sonora, DIROS se consolida como una figura a tener en cuenta dentro de la escena electrónica.',
     listen: 'Pistas',
     lastSet: 'Último Set',
-    pressAssets: 'Kit de Prensa',
+    pressAssets: 'Presskit',
     scroll: 'Scroll',
     scrollBio: 'Basado en Barcelona · Disponible para bookings internacionales',
     media: {
@@ -62,7 +62,7 @@ export const content = {
       hospitalityDesc: 'Transfers locales + Hotel 3*+ + Refrescos en cabina',
       download: 'Descargar PDF',
       downloadPressKit: 'Descargar Kit de Prensa',
-      pressAssets: 'Kit de Prensa',
+      pressAssets: 'Presskit',
     },
     pressAccess: {
       title: 'CONTRASEÑA DE ACCESO',
@@ -114,7 +114,7 @@ export const content = {
       'DIROS is a DJ and producer from Barcelona in constant evolution, with a solid background and a deep knowledge of electronic music. His versatile and dynamic approach allows him to fuse different styles into immersive sets, designed to precisely adapt to the context and energy of each dance floor.\n\nHis sound moves between Minimal Deep Tech, Minimal and Tech House, shaping a contemporary, dancefloor-driven proposal of high artistic quality. Thanks to his crowd-reading ability and his sonic identity, DIROS establishes himself as a figure to watch within the electronic scene.',
     listen: 'Tracks',
     lastSet: 'Latest Set',
-    pressAssets: 'Press Assets',
+    pressAssets: 'Presskit',
     scroll: 'Scroll',
     scrollBio: 'Based in Barcelona · Available for international bookings',
     media: {
@@ -139,7 +139,7 @@ export const content = {
       hospitalityDesc: 'Local Transfers + Hotel 3*+ + Cabin Refreshments',
       download: 'Download PDF',
       downloadPressKit: 'Download Press Kit',
-      pressAssets: 'Press Assets',
+      pressAssets: 'Presskit',
     },
     pressAccess: {
       title: 'ACCESS PASSWORD',
