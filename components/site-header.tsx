@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useLang, type Lang } from '@/lib/i18n'
+import { getBookingMailto } from '@/lib/data'
 import { cn } from '@/lib/utils'
 
 function LangToggle() {
@@ -33,7 +34,7 @@ function LangToggle() {
 }
 
 export function SiteHeader() {
-  const { t } = useLang()
+  const { lang, t } = useLang()
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -57,15 +58,15 @@ export function SiteHeader() {
         scrolled ? 'border-b border-border bg-background/85 backdrop-blur-xl' : 'border-b border-transparent',
       )}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <a href="#top" className="group flex items-center gap-3" aria-label="DIROS home">
+      <div className="mx-auto flex h-16 max-w-6xl flex-row items-center justify-between gap-2 px-3 sm:gap-4 sm:px-6">
+        <a href="#top" className="group flex shrink-0 items-center gap-3" aria-label="DIROS home">
           <Image
             src="/diros-logo.png"
             alt="DIROS"
             width={480}
             height={128}
             priority
-            className="h-8 w-auto"
+            className="h-7 w-auto sm:h-8"
           />
           <span className="hidden text-[10px] uppercase tracking-[0.25em] text-muted-foreground sm:inline">
             {t.role}
@@ -84,13 +85,14 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 flex-row items-center gap-2 sm:gap-3">
           <LangToggle />
           <a
-            href="mailto:bookings@dirosmusik.com?subject=Booking%20enquiry%20%E2%80%94%20DIROS"
-            className="rounded-full bg-[#8B0D18] px-6 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-[#B21A20] hover:shadow-[0_0_20px_rgba(139,13,24,0.6)]"
+            href={getBookingMailto(lang)}
+            className="whitespace-nowrap rounded-full bg-[#8B0D18] px-3 py-1.5 text-xs font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-[#B21A20] hover:shadow-[0_0_20px_rgba(139,13,24,0.6)] sm:px-6 sm:py-2.5 sm:text-sm sm:font-medium"
           >
-            {t.booking}
+            <span className="sm:hidden">{t.bookingShort}</span>
+            <span className="hidden sm:inline">{t.booking}</span>
           </a>
         </div>
       </div>

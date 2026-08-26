@@ -26,9 +26,14 @@ export const mapCities: MapCity[] = [
 ]
 
 // External profiles used by the hero secondary actions and social bar
+export function getBookingMailto(lang: 'es' | 'en') {
+  return lang === 'es'
+    ? 'mailto:bookings@dirosmusik.com?subject=Solicitud%20de%20Booking%20%E2%80%94%20DIROS'
+    : 'mailto:bookings@dirosmusik.com?subject=Booking%20Enquiry%20%E2%80%94%20DIROS'
+}
+
 export const LINKS = {
   bookingEmail: 'bookings@dirosmusik.com',
-  bookingMailto: 'mailto:bookings@dirosmusik.com?subject=Booking%20enquiry%20%E2%80%94%20DIROS',
   spotify: 'https://open.spotify.com/intl-es/artist/03U69LhJeNwXv8hsK9F25Y?si=HSUWYsudRwyQR2J8bYeHjw',
   soundcloudSet: 'https://on.soundcloud.com/0Az91ZTE4Ku07YGkhm',
   instagram: 'https://instagram.com/diros.musik',

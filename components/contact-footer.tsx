@@ -2,12 +2,12 @@
 
 import { ArrowUpRight } from 'lucide-react'
 import { useLang } from '@/lib/i18n'
-import { socialBar, LINKS } from '@/lib/data'
+import { getBookingMailto, socialBar } from '@/lib/data'
 import { brandIconMap } from '@/components/brand-icons'
 import { CopyEmail } from '@/components/copy-email'
 
 export function ContactFooter() {
-  const { t } = useLang()
+  const { lang, t } = useLang()
 
   return (
     <footer id="contact" className="scroll-mt-20 border-t border-border bg-[#0c0c0c]">
@@ -20,7 +20,7 @@ export function ContactFooter() {
 
           {/* Re-iterated booking CTA + copyable email */}
           <a
-            href={LINKS.bookingMailto}
+            href={getBookingMailto(lang)}
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#8B0D18] px-8 py-3 text-sm font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-[#B21A20] hover:shadow-[0_0_25px_rgba(139,13,24,0.7)]"
           >
             {t.contact.cta}

@@ -8,6 +8,7 @@ export const content = {
   es: {
     nav: { bio: 'Bio', venues: 'Clubs', tour: 'Fechas', contact: 'Contacto' },
     booking: 'Solicitar Booking',
+    bookingShort: 'Booking',
     presskit: 'Presskit',
     copied: '¡Email Copiado!',
     role: 'DJ | Producer',
@@ -19,7 +20,7 @@ export const content = {
     },
     venues: {
       title: 'Salas y Ciudades',
-      subtitle: 'Ciudades y salas donde he compartido mi música.',
+      subtitle: 'Ciudades y salas donde DIROS ha presentado su propuesta sonora',
       spain: 'España',
       international: 'Internacional',
       mapLabel: 'Mapa de actuaciones',
@@ -85,6 +86,7 @@ export const content = {
   en: {
     nav: { bio: 'Bio', venues: 'Clubs', tour: 'Dates', contact: 'Contact' },
     booking: 'Bookings & Inquiries',
+    bookingShort: 'Bookings',
     presskit: 'Presskit',
     copied: 'Email Copied!',
     role: 'DJ | Producer',
@@ -96,7 +98,7 @@ export const content = {
     },
     venues: {
       title: 'DIROS SPOT',
-      subtitle: "Cities and venues where I've played my music.",
+      subtitle: 'Cities and venues where DIROS has showcased his sound',
       spain: 'Spain',
       international: 'International',
       mapLabel: 'Performance map',

@@ -2,11 +2,11 @@
 
 import { Calendar, ArrowUpRight } from 'lucide-react'
 import { useLang } from '@/lib/i18n'
-import { upcomingShows, LINKS } from '@/lib/data'
+import { getBookingMailto, upcomingShows } from '@/lib/data'
 import { SectionHeading } from '@/components/section-heading'
 
 export function TourSection() {
-  const { t } = useLang()
+  const { lang, t } = useLang()
 
   return (
     <section id="tour" className="scroll-mt-20 border-b border-border">
@@ -40,7 +40,7 @@ export function TourSection() {
               {t.tour.tba}
             </p>
             <a
-              href={LINKS.bookingMailto}
+              href={getBookingMailto(lang)}
               className="inline-flex items-center gap-2 rounded-full bg-[#8B0D18] px-6 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-[#B21A20] hover:shadow-[0_0_20px_rgba(139,13,24,0.6)]"
             >
               {t.booking}
