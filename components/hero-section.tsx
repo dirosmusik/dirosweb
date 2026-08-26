@@ -3,12 +3,12 @@
 import Image from 'next/image'
 import { ArrowRight, Headphones, Radio, ChevronDown } from 'lucide-react'
 import { useLang } from '@/lib/i18n'
-import { LINKS } from '@/lib/data'
+import { getBookingMailto, LINKS } from '@/lib/data'
 import { CopyEmail } from '@/components/copy-email'
 import { PressAccessModal } from '@/components/press-access-modal'
 
 export function HeroSection() {
-  const { t } = useLang()
+  const { lang, t } = useLang()
 
   return (
     <section id="top" className="relative isolate h-[100svh] w-full overflow-hidden">
@@ -41,7 +41,7 @@ export function HeroSection() {
         {/* Primary booking action */}
         <div className="mt-12 flex flex-col items-center">
           <a
-            href={LINKS.bookingMailto}
+            href={getBookingMailto(lang)}
             className="inline-flex items-center gap-2 rounded-full bg-[#8B0D18] px-6 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-[#B21A20] hover:shadow-[0_0_20px_rgba(139,13,24,0.6)]"
           >
             {t.booking}

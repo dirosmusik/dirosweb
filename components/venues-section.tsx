@@ -138,23 +138,29 @@ function VenuePopover({
           visible ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0'
         }`}
       >
-        <div className="relative aspect-video overflow-hidden">
-          <video
-            key={display.id}
-            ref={videoRef}
-            src={encodeURI(display.video)}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            poster={display.image || '/placeholder.svg'}
-            className={`size-full object-cover ${display.id === 'mataro' ? 'object-bottom' : 'object-center'}`}
-          />
-          {/* cinematic overlay */}
+        <div className="relative aspect-video overflow-hidden bg-black">
+          {display.video ? (
+            <video
+              key={display.id}
+              ref={videoRef}
+              src={encodeURI(display.video)}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              poster={display.image || '/placeholder.svg'}
+              aria-label={`${display.venues[0]} — ${display.name}`}
+              className={`size-full object-cover ${display.id === 'mataro' ? 'object-bottom' : 'object-center'}`}
+            />
+          ) : (
+            <img
+              src={display.image}
+              alt={`${display.venues[0]} — ${display.name}`}
+              className="size-full object-cover"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-
-          {/* live indicator */}
           <div className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-black/60 px-2 py-1 backdrop-blur-sm">
             <span className="size-1.5 animate-pulse rounded-full bg-[#8B0D18]" />
             <span className="text-[10px] font-semibold uppercase tracking-widest text-white/80">
@@ -162,17 +168,17 @@ function VenuePopover({
             </span>
           </div>
 
-          {/* mute / unmute toggle */}
-          <span
-            className="absolute bottom-3 right-3 flex size-8 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white backdrop-blur-sm transition-colors hover:border-[#8B0D18] hover:text-[#B21A20]"
-            aria-hidden
-          >
-            {muted ? <VolumeX className="size-4" /> : <Volume2 className="size-4" />}
-          </span>
+          {display.video && (
+            <span
+              className="absolute bottom-3 right-3 flex size-8 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white backdrop-blur-sm transition-colors hover:border-[#8B0D18] hover:text-[#B21A20]"
+              aria-hidden
+            >
+              {muted ? <VolumeX className="size-4" /> : <Volume2 className="size-4" />}
+            </span>
+          )}
 
-          {/* title overlay */}
-          <div className="absolute inset-x-0 bottom-0 p-4 pr-14">
-            <p className="text-base font-bold leading-tight text-white text-balance">
+          <div className={`absolute inset-x-0 bottom-0 p-4 ${display.video ? 'pr-14' : ''}`}>
+            <p className="text-balance text-base font-bold leading-tight text-white">
               {display.venues.join(' · ')}
             </p>
             <p className="mt-0.5 text-xs font-medium uppercase tracking-widest text-[#B21A20]">

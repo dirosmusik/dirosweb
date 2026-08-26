@@ -1,5 +1,5 @@
 // Cities grouped with geo-coordinates ([lng, lat]) for the custom SVG map + interactive list
-// Exactly ONE map pin/node per city and ONE looping video popover per city.
+// Exactly ONE map pin/node per city and ONE looping video popover per city when media is available.
 export type MapCity = {
   id: string
   name: string
@@ -18,6 +18,7 @@ export const mapCities: MapCity[] = [
   { id: 'vic', name: 'Vic', region: 'spain', coordinates: [2.2549, 41.9301], venues: ['Snooz'], image: '/venues/mataro.png', video: '/venues/video/snooz (vic).MOV' },
   { id: 'madrid', name: 'Madrid', region: 'spain', coordinates: [-3.7038, 40.4168], venues: ['The Bassement Club'], image: '/venues/madrid.png', video: '/venues/video/bassement (madrid).mp4' },
   { id: 'ibiza', name: 'Ibiza', region: 'spain', coordinates: [1.4321, 38.9067], venues: ['Tantra Ibiza'], image: '/venues/ibiza.png', video: '/venues/video/tantra (ibiza).mp4' },
+  { id: 'castellon', name: 'Castellón', region: 'spain', coordinates: [-0.0407, 39.9864], venues: ['Nudo Beach'], image: '/venues/castellon.png', video: '' },
   // Internacional
   { id: 'andorra', name: 'El Tarter, Andorra', region: 'intl', coordinates: [1.6566, 42.5776], venues: ['The Boss Après Ski'], image: '/venues/andorra.png', video: '/venues/video/the boss (andorra).mov' },
   { id: 'parma', name: 'Parma, Italia', region: 'intl', coordinates: [10.3279, 44.8015], venues: ['Astrolabio'], image: '/venues/parma.png', video: '/venues/video/astrolabio (it).mp4' },
@@ -25,18 +26,21 @@ export const mapCities: MapCity[] = [
   { id: 'amsterdam', name: 'Ámsterdam, Países Bajos', region: 'intl', coordinates: [4.9041, 52.3676], venues: ['Madam'], image: '/venues/amsterdam.png', video: '/venues/video/madam (amsterdam).mov' },
 ]
 
-// External profiles used by the hero secondary actions and social bar
+export function getBookingMailto(lang: 'es' | 'en') {
+  return lang === 'es'
+    ? 'mailto:bookings@dirosmusik.com?subject=Solicitud%20de%20Booking%20%E2%80%94%20DIROS'
+    : 'mailto:bookings@dirosmusik.com?subject=Booking%20Enquiry%20%E2%80%94%20DIROS'
+}
+
 export const LINKS = {
   bookingEmail: 'bookings@dirosmusik.com',
-  bookingMailto: 'mailto:bookings@dirosmusik.com?subject=Booking%20enquiry%20%E2%80%94%20DIROS',
   spotify: 'https://open.spotify.com/intl-es/artist/03U69LhJeNwXv8hsK9F25Y?si=HSUWYsudRwyQR2J8bYeHjw',
   soundcloudSet: 'https://on.soundcloud.com/0Az91ZTE4Ku07YGkhm',
   instagram: 'https://instagram.com/diros.musik',
-  bandcamp: 'https://bandcamp.com',
-  tiktok: 'https://tiktok.com/@diros.musik',
+  bandcamp: 'https://diros.bandcamp.com/',
+  tiktok: 'https://tiktok.com/@dirosmusik',
 }
 
-// Horizontal social bar just below the hero
 export const socialBar = [
   { label: 'SoundCloud', href: 'https://soundcloud.com/dirosdj', icon: 'soundcloud' as const },
   { label: 'Spotify', href: 'https://open.spotify.com/intl-es/artist/03U69LhJeNwXv8hsK9F25Y?si=HSUWYsudRwyQR2J8bYeHjw', icon: 'spotify' as const },
@@ -46,7 +50,6 @@ export const socialBar = [
   { label: 'TikTok', href: 'https://www.tiktok.com/@dirosmusik', icon: 'tiktok' as const },
 ]
 
-// Upcoming shows — only future dates, displayed as a clean row list
 export type UpcomingShow = { date: string; party: string; venue: string; city: string }
 
 export const upcomingShows: UpcomingShow[] = [
