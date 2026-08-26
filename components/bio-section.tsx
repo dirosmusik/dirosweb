@@ -14,7 +14,13 @@ export function BioSection() {
         <SectionHeading eyebrow="01" title={t.bio.title} />
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
-          <p className="text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">{t.heroBio}</p>
+          <div className="space-y-5">
+            {t.heroBio.split('\n\n').map((paragraph, i) => (
+              <p key={i} className="text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
+                {paragraph}
+              </p>
+            ))}
+          </div>
 
           <div className="space-y-8">
             <div>

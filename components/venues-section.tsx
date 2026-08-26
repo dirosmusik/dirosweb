@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Volume2, VolumeX } from 'lucide-react'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 import { useLang } from '@/lib/i18n'
 import { mapCities, type MapCity } from '@/lib/data'
@@ -80,10 +81,18 @@ function DirosMap({
   )
 }
 
-/** Sleek dark video-style preview card shown while a city is hovered. */
-function VenuePopover({ activeCity }: { activeCity: MapCity | null }) {
+/** Sleek dark video-style preview card shown while a city is hovered. Tap/click to toggle audio. */
+function VenuePopover({
+  activeCity,
+  onActivate,
+}: {
+  activeCity: MapCity | null
+  onActivate: (id: string | null) => void
+}) {
   const [display, setDisplay] = useState<MapCity | null>(null)
   const [visible, setVisible] = useState(false)
+  const [muted, setMuted] = useState(true)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
 
   useEffect(() => {
     if (activeCity) {
@@ -96,31 +105,53 @@ function VenuePopover({ activeCity }: { activeCity: MapCity | null }) {
     return () => clearTimeout(timeout)
   }, [activeCity])
 
+  // Reset to muted whenever the displayed venue changes (seamless hover start).
+  useEffect(() => {
+    setMuted(true)
+  }, [display?.id])
+
+  // Keep the actual media element's muted flag in sync with state.
+  useEffect(() => {
+    if (videoRef.current) videoRef.current.muted = muted
+  }, [muted, display?.id])
+
   if (!display) return null
 
+  const toggleMuted = () => setMuted((m) => !m)
+
   return (
-    <div
-      className="pointer-events-none absolute inset-x-3 top-3 z-20 flex justify-center"
-      aria-hidden
-    >
+    <div className="pointer-events-none absolute inset-x-3 top-3 z-20 flex justify-center">
       <div
-        className={`w-full max-w-sm overflow-hidden rounded-xl border border-[#8B0D18]/40 bg-black/90 shadow-2xl backdrop-blur-md transition-all duration-300 ease-out ${
+        role="button"
+        tabIndex={0}
+        aria-label={muted ? 'Activar sonido' : 'Silenciar'}
+        onClick={toggleMuted}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            toggleMuted()
+          }
+        }}
+        onMouseEnter={() => onActivate(display.id)}
+        onMouseLeave={() => onActivate(null)}
+        className={`pointer-events-auto w-full max-w-sm cursor-pointer overflow-hidden rounded-xl border border-[#8B0D18]/50 bg-black/90 shadow-2xl backdrop-blur-md transition-all duration-300 ease-out ${
           visible ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0'
         }`}
       >
         <div className="relative aspect-video overflow-hidden bg-black">
           {display.video ? (
             <video
-              key={display.video}
-              src={display.video}
-              poster={display.image}
+              key={display.id}
+              ref={videoRef}
+              src={encodeURI(display.video)}
               autoPlay
               loop
               muted
               playsInline
               preload="metadata"
+              poster={display.image || '/placeholder.svg'}
               aria-label={`${display.venues[0]} — ${display.name}`}
-              className="size-full object-cover"
+              className={`size-full object-cover ${display.id === 'mataro' ? 'object-bottom' : 'object-center'}`}
             />
           ) : (
             <img
@@ -129,16 +160,24 @@ function VenuePopover({ activeCity }: { activeCity: MapCity | null }) {
               className="size-full object-cover"
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
           <div className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-black/60 px-2 py-1 backdrop-blur-sm">
             <span className="size-1.5 animate-pulse rounded-full bg-[#8B0D18]" />
             <span className="text-[10px] font-semibold uppercase tracking-widest text-white/80">
-              Preview
+              Live
             </span>
           </div>
 
-          <div className="absolute inset-x-0 bottom-0 p-4">
+          {display.video && (
+            <span
+              className="absolute bottom-3 right-3 flex size-8 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white backdrop-blur-sm transition-colors hover:border-[#8B0D18] hover:text-[#B21A20]"
+              aria-hidden
+            >
+              {muted ? <VolumeX className="size-4" /> : <Volume2 className="size-4" />}
+            </span>
+          )}
+
+          <div className={`absolute inset-x-0 bottom-0 p-4 ${display.video ? 'pr-14' : ''}`}>
             <p className="text-balance text-base font-bold leading-tight text-white">
               {display.venues.join(' · ')}
             </p>
@@ -219,7 +258,7 @@ export function VenuesSection() {
             </div>
             <div className="relative p-2 sm:p-4">
               <DirosMap activeId={activeId} onActivate={setActiveId} />
-              <VenuePopover activeCity={activeCity} />
+              <VenuePopover activeCity={activeCity} onActivate={setActiveId} />
             </div>
           </div>
 

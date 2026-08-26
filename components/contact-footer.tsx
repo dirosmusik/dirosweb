@@ -49,7 +49,11 @@ export function ContactFooter() {
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
-          <span className="text-lg font-bold tracking-[0.2em] text-foreground">DIROS</span>
+          <img
+            src="/logos/diros-isotype.svg"
+            alt="DIROS"
+            className="h-8 w-auto opacity-90 transition-all duration-300 hover:opacity-100 hover:drop-shadow-[0_0_16px_rgba(139,13,24,0.9)]"
+          />
           <p className="text-xs text-muted-foreground">
             &copy; {new Date().getFullYear()} DIROS. {t.rights}
           </p>

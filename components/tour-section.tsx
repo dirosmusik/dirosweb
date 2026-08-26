@@ -1,6 +1,6 @@
 'use client'
 
-import { Calendar, ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Calendar } from 'lucide-react'
 import { useLang } from '@/lib/i18n'
 import { getBookingMailto, upcomingShows } from '@/lib/data'
 import { SectionHeading } from '@/components/section-heading'
@@ -17,17 +17,26 @@ export function TourSection() {
           <ul className="mt-10 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
             {upcomingShows.map((show) => (
               <li
-                key={`${show.date}-${show.venue}`}
+                key={`${show.date}-${show.party}`}
                 className="flex items-center gap-4 px-5 py-5 transition-colors hover:bg-elevated sm:gap-6 sm:px-6"
               >
-                <div className="flex w-16 shrink-0 flex-col items-center rounded-xl border border-border bg-background px-2 py-2 text-center">
-                  <span className="text-lg font-bold leading-none text-foreground">{show.date}</span>
-                  <span className="mt-1 text-[10px] uppercase tracking-wider text-[#B21A20]">{show.day}</span>
+                <div className="flex w-14 shrink-0 flex-col items-center rounded-xl border border-border bg-background px-2 py-2 text-center">
+                  <span className="text-base font-bold leading-none text-foreground">{show.date.split('/')[0]}</span>
+                  <span className="mt-1 text-[10px] font-medium uppercase tracking-wider text-[#B21A20]">
+                    {'/' + show.date.split('/')[1]}
+                  </span>
                 </div>
+
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-base font-semibold text-foreground">{show.venue}</p>
-                  <p className="truncate text-xs uppercase tracking-wider text-muted-foreground">{show.city}</p>
+                  <p className="truncate text-base font-bold text-foreground sm:text-lg">{show.party}</p>
+                  {show.venue && (
+                    <p className="truncate text-xs uppercase tracking-wider text-muted-foreground">{show.venue}</p>
+                  )}
                 </div>
+
+                <span className="shrink-0 text-right text-xs font-medium uppercase tracking-wider text-muted-foreground sm:text-sm">
+                  {show.city}
+                </span>
               </li>
             ))}
           </ul>
