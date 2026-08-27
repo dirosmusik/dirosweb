@@ -123,6 +123,25 @@ function isTba(party: string): boolean {
   return party.trim().toUpperCase().startsWith('TBA')
 }
 
+// Google Calendar's LOCATION is often a full street address, e.g.
+// "Bus Hexperience, C/ Port Esportiu, 14, 08930 Sant Adrià de Besòs, Barcelona, España"
+// We only want the last two comma-separated segments (region/city + country),
+// stripping any leading postal code from the city segment, e.g. "Barcelona, España".
+function extractCityCountry(location: string): string {
+  const parts = location
+    .split(',')
+    .map((p) => p.trim())
+    .filter(Boolean)
+
+  if (parts.length === 0) return ''
+  if (parts.length === 1) return parts[0]
+
+  const country = parts[parts.length - 1]
+  const cityPart = parts[parts.length - 2].replace(/^\d+\s*/, '').trim()
+
+  return cityPart ? `${cityPart}, ${country}` : country
+}
+
 function formatDDMM(date: Date): string {
   const d = String(date.getUTCDate()).padStart(2, '0')
   const m = String(date.getUTCMonth() + 1).padStart(2, '0')
@@ -159,9 +178,10 @@ export async function getUpcomingShows(): Promise<UpcomingShow[]> {
       .sort((a, b) => a.start.getTime() - b.start.getTime())
       .map((e) => {
         const { party, venue, city: titleCity } = parseTitle(e.summary)
-        // City comes from the Calendar event's location field; fall back
-        // to a "| City" segment in the title if location isn't set.
-        const city = e.location || titleCity
+        // City comes from the Calendar event's location field (trimmed
+        // down to "City, Country"); fall back to a "| City" segment in
+        // the title if location isn't set.
+        const city = e.location ? extractCityCountry(e.location) : titleCity
         return { date: formatDDMM(e.start), party, venue, city }
       })
       .filter((show) => !isTba(show.party))
