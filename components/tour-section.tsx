@@ -2,10 +2,10 @@
 
 import { ArrowUpRight, Calendar } from 'lucide-react'
 import { useLang } from '@/lib/i18n'
-import { getBookingMailto, upcomingShows } from '@/lib/data'
+import { getBookingMailto, type UpcomingShow } from '@/lib/data'
 import { SectionHeading } from '@/components/section-heading'
 
-export function TourSection() {
+export function TourSection({ shows }: { shows: UpcomingShow[] }) {
   const { lang, t } = useLang()
 
   return (
@@ -13,9 +13,9 @@ export function TourSection() {
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
         <SectionHeading eyebrow="03" title={t.tour.title} subtitle={t.tour.subtitle} />
 
-        {upcomingShows.length > 0 ? (
+        {shows.length > 0 ? (
           <ul className="mt-10 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
-            {upcomingShows.map((show) => (
+            {shows.map((show) => (
               <li
                 key={`${show.date}-${show.party}`}
                 className="flex items-center gap-4 px-5 py-5 transition-colors hover:bg-elevated sm:gap-6 sm:px-6"
