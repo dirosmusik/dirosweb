@@ -10,6 +10,7 @@ const WINDOW_DAYS = 40
 
 type RawEvent = {
   summary: string
+  location: string
   start: Date
 }
 
@@ -59,18 +60,20 @@ function parseIcs(raw: string): RawEvent[] {
 
   let inEvent = false
   let summary = ''
+  let location = ''
   let start: Date | null = null
 
   for (const line of lines) {
     if (line.startsWith('BEGIN:VEVENT')) {
       inEvent = true
       summary = ''
+      location = ''
       start = null
       continue
     }
     if (line.startsWith('END:VEVENT')) {
       if (inEvent && start) {
-        events.push({ summary: unescapeIcsText(summary), start })
+        events.push({ summary: unescapeIcsText(summary), location: unescapeIcsText(location), start })
       }
       inEvent = false
       continue
@@ -86,6 +89,8 @@ function parseIcs(raw: string): RawEvent[] {
 
     if (key === 'SUMMARY') {
       summary = value
+    } else if (key === 'LOCATION') {
+      location = value
     } else if (key === 'DTSTART') {
       start = parseIcsDate(value)
     }
@@ -94,8 +99,10 @@ function parseIcs(raw: string): RawEvent[] {
   return events
 }
 
-// Expected title format: "Party Name | Venue Name | City, Country"
-// Falls back gracefully if the delimiter is missing.
+// Expected title format: "Party Name | Venue Name" (city comes from the
+// event's LOCATION field). Falls back gracefully if the delimiter is
+// missing, and still supports an optional 3rd "| City" segment as a
+// backward-compatible fallback when LOCATION isn't set.
 function parseTitle(summary: string): { party: string; venue: string; city: string } {
   const parts = summary
     .split('|')
@@ -108,7 +115,12 @@ function parseTitle(summary: string): { party: string; venue: string; city: stri
   if (parts.length === 2) {
     return { party: parts[0], venue: parts[1], city: '' }
   }
-  return { party: summary.trim() || 'TBA', venue: '', city: '' }
+  return { party: summary.trim(), venue: '', city: '' }
+}
+
+// Events whose party name starts with "TBA" are intentionally hidden.
+function isTba(party: string): boolean {
+  return party.trim().toUpperCase().startsWith('TBA')
 }
 
 function formatDDMM(date: Date): string {
@@ -146,9 +158,13 @@ export async function getUpcomingShows(): Promise<UpcomingShow[]> {
       .filter((e) => e.start >= todayStart && e.start <= windowEnd)
       .sort((a, b) => a.start.getTime() - b.start.getTime())
       .map((e) => {
-        const { party, venue, city } = parseTitle(e.summary)
+        const { party, venue, city: titleCity } = parseTitle(e.summary)
+        // City comes from the Calendar event's location field; fall back
+        // to a "| City" segment in the title if location isn't set.
+        const city = e.location || titleCity
         return { date: formatDDMM(e.start), party, venue, city }
       })
+      .filter((show) => !isTba(show.party))
   } catch (error) {
     console.error('[calendar] Failed to fetch upcoming shows, using fallback list:', error)
     return FALLBACK_SHOWS
