@@ -52,11 +52,9 @@ export const socialBar = [
 
 export type UpcomingShow = { date: string; party: string; venue: string; city: string }
 
-export const upcomingShows: UpcomingShow[] = [
+// Used only if the live Google Calendar fetch fails (see lib/calendar.ts).
+// Keep this updated occasionally as a safety net, but the source of truth
+// is the Google Calendar now — see lib/calendar.ts.
+export const FALLBACK_SHOWS: UpcomingShow[] = [
   { date: '22/08', party: 'Summer Party', venue: 'Metro Dance Club', city: 'Alicante, Spain' },
-  { date: '05/09', party: 'TBA', venue: 'Venue TBA', city: 'Location TBA' },
-  { date: '19/09', party: 'Babylon', venue: '', city: 'Girona, Spain' },
-  { date: '20/09', party: 'Swing', venue: 'Sea Sea Club', city: 'Barcelona, Spain' },
-  { date: '26/09', party: 'TBA', venue: 'Venue TBA', city: 'Location TBA' },
-  { date: '03/10', party: 'Play', venue: 'Cocoa', city: 'Mataró, Spain' },
 ]
