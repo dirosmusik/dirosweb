@@ -7,8 +7,11 @@ import { VenuesSection } from '@/components/venues-section'
 import { TourSection } from '@/components/tour-section'
 import { ContactFooter } from '@/components/contact-footer'
 import { CookieBanner } from '@/components/cookie-banner'
+import { getUpcomingShows } from '@/lib/calendar'
 
-export default function Page() {
+export default async function Page() {
+  const shows = await getUpcomingShows()
+
   return (
     <LanguageProvider>
       <div className="min-h-screen bg-background">
@@ -18,7 +21,7 @@ export default function Page() {
           <SocialBar />
           <BioSection />
           <VenuesSection />
-          <TourSection />
+          <TourSection shows={shows} />
         </main>
         <ContactFooter />
         <CookieBanner />
