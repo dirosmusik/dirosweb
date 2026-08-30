@@ -2,15 +2,14 @@
 
 import { useEffect, useState } from 'react'
 import { Cookie } from 'lucide-react'
-
-const STORAGE_KEY = 'diros-cookie-consent'
+import { COOKIE_CONSENT_KEY, COOKIE_CONSENT_EVENT } from '@/lib/consent'
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     try {
-      if (!localStorage.getItem(STORAGE_KEY)) {
+      if (!localStorage.getItem(COOKIE_CONSENT_KEY)) {
         const id = requestAnimationFrame(() => setVisible(true))
         return () => cancelAnimationFrame(id)
       }
@@ -22,10 +21,12 @@ export function CookieBanner() {
 
   function accept() {
     try {
-      localStorage.setItem(STORAGE_KEY, 'accepted')
+      localStorage.setItem(COOKIE_CONSENT_KEY, 'accepted')
     } catch {
       // ignore storage errors
     }
+    // Lets components like MetaPixel start tracking immediately, without a reload.
+    window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT))
     setVisible(false)
   }
 
