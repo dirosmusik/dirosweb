@@ -27,6 +27,12 @@ export function CookieBanner() {
     }
     // Lets components like MetaPixel start tracking immediately, without a reload.
     window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT))
+    // Explicit call in case window.fbq is already defined (e.g. the pixel
+    // script had already loaded earlier in this session).
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('init', '1058143220354590')
+      window.fbq('track', 'PageView')
+    }
     setVisible(false)
   }
 
